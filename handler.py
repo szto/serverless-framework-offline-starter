@@ -23,8 +23,8 @@ def hello(event, context):
     # integration
 
 
-def sqs_hello(event, context):
-    text = str(event["Records"][0]["body"])
+def sqs_consumer(event, context):
+    message = str(event["Records"][0]["body"])
     serailzer = {
         "request_id": 1234,
         "birthday": "19840526",
@@ -40,7 +40,7 @@ def sqs_hello(event, context):
     return {"status_code": 400, "text": "Nothing here"}
 
 
-def call_sqs(event, context):
+def sqs_producer(event, context):
 
     sqs = boto3.client("sqs", endpoint_url="http://localhost:9324")
     queue_url = "http://0.0.0.0:9324/queue/MyTestQueue"
